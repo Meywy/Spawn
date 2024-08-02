@@ -16,7 +16,7 @@ public class SetSpawnCommand implements CommandExecutor {
         this.plugin = plugin;
     }
 
-    String spawnName = ChatColor.GRAY + "[" + ChatColor.GOLD + "Spawn" + ChatColor.GRAY + "] ";
+    public static String Name = ChatColor.GRAY + "[" + ChatColor.GOLD + "Spawn" + ChatColor.GRAY + "] ";
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
@@ -29,14 +29,12 @@ public class SetSpawnCommand implements CommandExecutor {
             if (player.hasPermission("spawn.set") || player.hasPermission("spawn.*") ) {
                 plugin.getConfig().set("spawn", location);
                 plugin.saveConfig();
-                player.sendMessage(spawnName + ChatColor.GREEN + "A new spawn has been set!");
-
+                player.sendMessage(Name + ChatColor.GREEN + "A new spawn has been set!");
             } else {
-                player.sendMessage(spawnName + ChatColor.RED + "You do not have permissions!");
+                player.sendMessage(Name + ChatColor.RED + "You do not have permissions!");
             }
-
         } else {
-            commandSender.sendMessage(spawnName + ChatColor.RED + "Only players can use this command!");
+            commandSender.sendMessage(Name + ChatColor.RED + "Only players can use this command!");
         }
 
         return false;
