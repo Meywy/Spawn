@@ -1,9 +1,0 @@
-name: Spawn
-version: '1.0'
-main: dev.meywy.spawn.Spawn
-api-version: '1.19'
-commands:
-  spawn:
-    description: Teleports player to a spawn
-  setspawn:
-    description: Set a new spawn on player location
