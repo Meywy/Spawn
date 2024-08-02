@@ -16,8 +16,6 @@ public class SpawnCommand implements CommandExecutor {
         this.plugin = plugin;
     }
 
-    String spawnName = ChatColor.GRAY + "[" + ChatColor.GOLD + "Spawn" + ChatColor.GRAY + "] ";
-
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
@@ -29,12 +27,12 @@ public class SpawnCommand implements CommandExecutor {
             if (location != null) {
                 if (player.hasPermission("spawn.spawn") || player.hasPermission("spawn.*")) {
                     player.teleport(location);
-                    player.sendMessage(spawnName + ChatColor.GREEN + "You have been teleported to spawn.");
+                    player.sendMessage(SetSpawnCommand.Name + ChatColor.GREEN + "You have been teleported to spawn.");
                 } else {
-                    player.sendMessage(spawnName + ChatColor.RED + "You do not have permissions!");
+                    player.sendMessage(SetSpawnCommand.Name + ChatColor.RED + "You do not have permissions!");
                 }
             } else {
-                player.sendMessage(spawnName + ChatColor.RED + "The spawn location is not set!");
+                player.sendMessage(SetSpawnCommand.Name + ChatColor.RED + "The spawn location is not set!");
             }
         }
 
