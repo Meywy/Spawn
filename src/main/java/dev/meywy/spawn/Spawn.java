@@ -17,7 +17,7 @@ public final class Spawn extends JavaPlugin {
         getCommand("spawn").setExecutor(new SpawnCommand(this));
         getCommand("setspawn").setExecutor(new SetSpawnCommand(this));
 
-        Bukkit.getPluginManager().registerEvents(new SpawnListener(main), this);
+        Bukkit.getPluginManager().registerEvents(new SpawnListener(this), this);
 
         getConfig().options().copyDefaults();
         saveDefaultConfig();
