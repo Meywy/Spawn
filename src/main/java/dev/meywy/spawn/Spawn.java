@@ -12,14 +12,15 @@ public final class Spawn extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
+        getConfig().options().copyDefaults();
+        saveDefaultConfig();
         getLogger().info("Successfully Loaded");
 
         getCommand("spawn").setExecutor(new SpawnCommand(this));
         getCommand("setspawn").setExecutor(new SetSpawnCommand(this));
         Bukkit.getPluginManager().registerEvents(new SpawnListener(this), this);
 
-        getConfig().options().copyDefaults();
-        saveDefaultConfig();
+
     }
 
     @Override
