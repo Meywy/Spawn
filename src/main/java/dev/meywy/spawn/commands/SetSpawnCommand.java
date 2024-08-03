@@ -1,5 +1,6 @@
 package dev.meywy.spawn.commands;
 
+import dev.meywy.spawn.commands.SpawnCommand;
 import dev.meywy.spawn.Spawn;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -7,6 +8,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+
 
 public class SetSpawnCommand implements CommandExecutor {
 
@@ -16,27 +19,26 @@ public class SetSpawnCommand implements CommandExecutor {
         this.plugin = plugin;
     }
 
-    public static String Name = ChatColor.GRAY + "[" + ChatColor.GOLD + "Spawn" + ChatColor.GRAY + "] ";
-
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
 
-        if (commandSender instanceof Player) {
-            Player player = (Player) commandSender;
-            Location location = player.getLocation();
-
-
-            if (player.hasPermission("spawn.set") || player.hasPermission("spawn.*") ) {
-                plugin.getConfig().set("spawn", location);
-                plugin.saveConfig();
-                player.sendMessage(Name + ChatColor.GREEN + "A new spawn has been set!");
-            } else {
-                player.sendMessage(Name + ChatColor.RED + "You do not have permissions!");
-            }
-        } else {
-            commandSender.sendMessage(Name + ChatColor.RED + "Only players can use this command!");
+        if (!(sender instanceof Player p)) {
+            sender.sendMessage(ChatColor.RED + "You must be a player to use this command!");
+            return true;
         }
 
-        return false;
+        boolean hasPermission = p.hasPermission("spawn.spawn") || p.hasPermission("spawn.*");
+
+        if (!hasPermission) {
+            p.sendMessage(SpawnCommand.getNoPerms());
+            return true;
+        }
+
+        Location l = p.getLocation();
+        plugin.getConfig().set("spawn", l);
+        plugin.saveConfig();
+        p.sendMessage(SpawnCommand.getName() + ChatColor.GREEN + "A new spawn has been set!");
+        return true;
     }
 }
+
